@@ -4,8 +4,6 @@
 1. Download the data from [LongMemEval](https://github.com/xiaowu0162/LongMemEval?tab=readme-ov-file).
 2. Install requirements from requirements.txt
 
-Need to figure out requirements.txt
-
 ```
 /longmemeval(M) python3 ./main.py 
 process_func name: hello_world_process_question
