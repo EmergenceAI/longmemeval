@@ -1,5 +1,6 @@
-from example_function import hello_world_process_question as process_func
+# from example_function import hello_world_process_question as process_func
 # from example_guessbot import hello_world_process_question as process_func
+from example_rest_api import call_rest_endpoint as process_func
 # Edit ^^^ to point to your function.
 
 import json, os, inspect, hashlib

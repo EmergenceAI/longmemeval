@@ -20,6 +20,35 @@ def call_rest_endpoint(haystack_sessions: list[list[dict]], question: str, quest
 
 # Example of a REST endpoint that would receive the JSON data
 def rest_endpoint(big_json_str:str):
+    """
+    The format of big_json_str is:
+    {
+        'haystack_sessions': List[List[Dict[str, str]]], # List of sessions
+            [
+                [ # First session
+                    {"role": "user", "content": "Hello"},
+                    {"role": "assistant", "content": "Hi there!"},
+                    ...
+                ],
+                [ # Second session
+                    {"role": "user", "content": "What is your name?"},
+                    {"role": "assistant", "content": "I am a chatbot."},
+                    ...
+                ],
+                ... # More sessions
+            ],
+        'question': str
+            "What is the capital of France?",
+        'question_date': str
+            "2023/08/20 (Sun) 23:59",
+        'haystack_dates': List[str]
+            [
+                '2023/05/20 (Sat) 02:57', # Timestamp of the first session
+                '2023/05/20 (Sat) 03:51', # Timestamp of the second session
+                ... # More timestamps
+            ]
+    }
+    """
     # This will be on the receiving end of the REST endpoint
     big_json = json.loads(big_json_str)
     haystack_sessions = big_json['haystack_sessions']
