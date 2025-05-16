@@ -110,7 +110,7 @@ def stop_early(num_success, nobs, confidence=0.95, b_successes=0, b_nobs=0, tole
     interval_width = upper - lower
     return interval_width <= 2 * tolerance
 
-def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0.99, b_successes=0, b_nobs=0, tolerance=0.05):
+def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0.99, b_successes=0, b_nobs=0, tolerance=0.05, verbose=False):
     """
     Processes Xs one by one, stopping early when some certainty is reached.
     1. If b_nobs > 0, compare against baseline.
@@ -138,6 +138,8 @@ def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0
         hypotheses.append(hypothesis)
         num_success += result
         nobs += 1
+        if verbose:
+            tqdm.tqdm.write(f'Processed {nobs} trials with {num_success} successes.  The last result was {result}.')
         if stop_early(num_success, nobs, confidence, b_successes, b_nobs, tolerance):
             tqdm.tqdm.write(f'Stopping early at {nobs} trials with {num_success} successes.')
             if b_nobs > 0: tqdm.tqdm.write(f'Current model is {"BETTER" if num_success / nobs > b_successes / b_nobs else "WORSE"} THAN baseline.')
