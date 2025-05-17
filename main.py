@@ -53,4 +53,4 @@ if False:
         for hashable_session, count in counts.items():
             if count > 1 and len(hashable_session) > 0:
                 print(f"Duplicate session found in haystack {i}: {len(str(hashable_session))} (count: {count})")
-    print(f'Total turns: {total_turns}')
+    print(f'Total turns: {total_turns}, max turns: {max_turns}')
