@@ -34,17 +34,3 @@ def main():
     evaluate_qa(hypotheses, evaluator)
 
 if __name__ == '__main__': main()
-
-
-if False:
-    from collections import Counter
-    DATA_DIR = './data/'
-    filename = 'longmemeval_s.json'
-    haystacks = json.load(open(f'{DATA_DIR}/{filename}'))
-    for i, haystack in enumerate(haystacks):
-        sessions = haystack['haystack_sessions']
-        hashable_sessions = [tuple((turn['role'], turn['content']) for turn in session) for session in sessions]
-        counts = Counter(hashable_sessions)
-        for hashable_session, count in counts.items():
-            if count > 1 and len(hashable_session) > 0:
-                print(f"Duplicate session found in haystack {i}: {len(str(hashable_session))} (count: {count})")
