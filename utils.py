@@ -89,9 +89,18 @@ def fixed_shuffle(pairs, seed=42):
     rng.shuffle(shuffled)
     return shuffled
 
+def prob_different(hA, obsA, hB, obsB, N=100_000):
+    samples_A = np.random.beta(hA + 1, obsA - hA + 1, N)
+    samples_B = np.random.beta(hB + 1, obsB - hB + 1, N)
+    ppAgreater = np.mean(samples_A > samples_B) # Probability P(H|A) > P(H|B)
+    return max(ppAgreater, 1 - ppAgreater)  # Return the maximum of the two-tailed probabilities
+
 def stop_early(num_success, nobs, confidence=0.95, b_successes=0, b_nobs=0, tolerance=0.05):
     if nobs < 10 or confidence > .999999999: return False  # Wilson is OK even for small nobs
     if b_nobs > 0:
+        pp_value = prob_different(num_success, nobs, b_successes, b_nobs)
+        return pp_value > confidence
+    '''
         # Compare to B.  Return True if we're confident that A is better than B or vice versa.
         if (nobs == 0 or b_nobs == 0 or (num_success == 0 and b_successes == 0) or (num_success == nobs and b_successes == b_nobs)):
             # Guard: if both methods have same outcome (e.g., 0/100 and 0/100), test is meaningless
@@ -104,13 +113,14 @@ def stop_early(num_success, nobs, confidence=0.95, b_successes=0, b_nobs=0, tole
             # Falls back to two-proportion z-test otherwise.
             _test_stat, p_value = proportions_ztest([num_success, b_successes], [nobs, b_nobs], alternative='two-sided')
         return p_value < (1 - confidence)
+    '''
     # Returns whether to stop early when the Wilson score confidence interval
     # for accuracy is within +/- tolerance at the given confidence level.
     lower, upper = proportion_confint(count=num_success, nobs=nobs, alpha=1-confidence, method='wilson')
     interval_width = upper - lower
     return interval_width <= 2 * tolerance
 
-def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0.99, b_successes=0, b_nobs=0, tolerance=0.05):
+def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0.99, b_successes=0, b_nobs=0, tolerance=0.05, verbose=False):
     """
     Processes Xs one by one, stopping early when some certainty is reached.
     1. If b_nobs > 0, compare against baseline.
@@ -138,6 +148,8 @@ def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0
         hypotheses.append(hypothesis)
         num_success += result
         nobs += 1
+        if verbose:
+            tqdm.tqdm.write(f'Processed {nobs} trials with {num_success} successes.  The last result was {result}.')
         if stop_early(num_success, nobs, confidence, b_successes, b_nobs, tolerance):
             tqdm.tqdm.write(f'Stopping early at {nobs} trials with {num_success} successes.')
             if b_nobs > 0: tqdm.tqdm.write(f'Current model is {"BETTER" if num_success / nobs > b_successes / b_nobs else "WORSE"} THAN baseline.')

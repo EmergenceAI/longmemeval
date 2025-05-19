@@ -1,4 +1,6 @@
-from example_function import hello_world_process_question as process_func
+# from example_function import hello_world_process_question as process_func
+# from example_guessbot import hello_world_process_question as process_func
+from example_rest_api import call_rest_endpoint as process_func
 # Edit ^^^ to point to your function.
 
 import json, os, inspect, hashlib
@@ -14,7 +16,8 @@ def main():
     haystacks = json.load(open(f'{DATA_DIR}/{filename}'))
     evaluator = Evaluator(haystacks)
     # Early stopping parameters
-    confidence = 0.99 # Set to 1 to disable early stopping
+    # confidence = 0.99 # Set to 1 to disable early stopping
+    confidence = 1.
     b_successes = 0
     b_nobs = 0
     tolerance = 0.05 # Not used if b_nobs > 0
@@ -31,3 +34,17 @@ def main():
     evaluate_qa(hypotheses, evaluator)
 
 if __name__ == '__main__': main()
+
+
+if False:
+    from collections import Counter
+    DATA_DIR = './data/'
+    filename = 'longmemeval_s.json'
+    haystacks = json.load(open(f'{DATA_DIR}/{filename}'))
+    for i, haystack in enumerate(haystacks):
+        sessions = haystack['haystack_sessions']
+        hashable_sessions = [tuple((turn['role'], turn['content']) for turn in session) for session in sessions]
+        counts = Counter(hashable_sessions)
+        for hashable_session, count in counts.items():
+            if count > 1 and len(hashable_session) > 0:
+                print(f"Duplicate session found in haystack {i}: {len(str(hashable_session))} (count: {count})")

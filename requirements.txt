@@ -1,0 +1,6 @@
+diskcache
+numpy
+openai
+scipy
+statsmodels
+tqdm
