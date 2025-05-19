@@ -13,7 +13,8 @@ def hello_world_process_question(haystack_sessions: list[list[dict]], question: 
     msg_texts, msg_embeddings = [], []
     for idx, session in enumerate(haystack_sessions):
         for message in session:
-            if 'content' in message and 'role' in message:
+            # if 'content' in message and 'role' in message:    
+            if 'content' in message and message['role'] == 'user':  # for just user messages, but should be all messages probably
                 role = message['role']
                 content = message['content']
                 timestamp = haystack_dates[idx]
