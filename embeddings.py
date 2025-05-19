@@ -1,7 +1,11 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
 import pickle
-import faiss
+import faiss, diskcache, os
+
+CACHE_DIR = './cache/'
+cache_embed = diskcache.Cache(os.path.join(CACHE_DIR, 'embed'), eviction_policy='none')
+cache_embed.reset('cull_limit', 0)
 
 # Load model
 model = SentenceTransformer("msmarco-distilbert-base-v4")
@@ -20,6 +24,7 @@ def embed_lesson(lesson: dict) -> np.ndarray:
     embedding = model.encode(combined_text)
     return np.mean(embedding, axis=0)
 
+@cache_embed.memoize()
 def embed_message(message: str) -> np.ndarray:
     """
     Embed a query using the pre-trained model.
