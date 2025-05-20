@@ -1,7 +1,7 @@
 # from example_function import hello_world_process_question as process_func
 # from example_guessbot import hello_world_process_question as process_func
-# from example_rest_api import call_rest_endpoint as process_func
-from example_jeremy_mem import hello_world_process_question as process_func
+from example_rest_api import call_rest_endpoint as process_func
+# from example_jeremy_mem import hello_world_process_question as process_func
 
 # Edit ^^^ to point to your function.
 
@@ -31,7 +31,7 @@ def main():
     print(f'process_func module: {process_func.__module__}')
     print(f'process_func file: {inspect.getfile(process_func)}')
     #
-    hypotheses, num_success, nobs = predict_with_early_stopping(haystacks, process_func, evaluator, confidence, b_successes, b_nobs, tolerance)
+    hypotheses, num_success, nobs = predict_with_early_stopping(haystacks, process_func, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=True)
     print(f'Evaluated {nobs} hypotheses with {num_success} successes.  Accuracy: {num_success / nobs:.4f}')
     evaluate_qa(hypotheses, evaluator)
 
