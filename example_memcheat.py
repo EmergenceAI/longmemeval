@@ -54,23 +54,33 @@ def update_facts(haydate, conv, question, question_date, old_facts):
 
 def process_question(haystack_sessions: list[list[dict]], question: str, question_date:str, haystack_dates: list[str]) -> str:
     # Check sessions for duplicate sessions
-    dupes = []
-    for i in range(len(haystack_sessions)):
-        for j in range(i + 1, len(haystack_sessions)):
-            if haystack_dates[i] == haystack_dates[j]:
-                dupes.append((i, j))
-    if dupes:
-        print(f"DUPLICATE SESSIONS FOUND: {dupes}")
-        # Reconstruct a new haystack without the duplicates
-        delenda = {j if i < j else i for i, j in dupes}
-        new_haystack = []
-        new_timestamps = []
+    if False:
+        dupes = []
         for i in range(len(haystack_sessions)):
-            if i not in delenda:
-                new_haystack.append(haystack_sessions[i])
-                new_timestamps.append(haystack_dates[i])
-        haystack_sessions = new_haystack
-        haystack_dates = new_timestamps
+            for j in range(i + 1, len(haystack_sessions)):
+                if haystack_dates[i] == haystack_dates[j]:
+                    dupes.append((i, j))
+        if dupes:
+            print(f"DUPLICATE SESSIONS FOUND: {dupes}")
+            # Reconstruct a new haystack without the duplicates
+            delenda = {j if i < j else i for i, j in dupes}
+            new_haystack = []
+            new_timestamps = []
+            for i in range(len(haystack_sessions)):
+                if i not in delenda:
+                    new_haystack.append(haystack_sessions[i])
+                    new_timestamps.append(haystack_dates[i])
+            haystack_sessions = new_haystack
+            haystack_dates = new_timestamps
+            # Results when duplicates are removed:
+            # Evaluated 500 hypotheses with 403 successes.  Accuracy: 0.8060
+            # Accuracy: 0.806
+            #         single-session-user        : 95.71% (70 obs)
+            #         multi-session              : 75.19% (133 obs)
+            #         temporal-reasoning         : 74.44% (133 obs)
+            #         knowledge-update           : 91.03% (78 obs)
+            #         single-session-assistant   : 96.43% (56 obs)
+            #         single-session-preference  : 40.00% (30 obs)
     # Process the haystack in light of the question.
     # Sort the haystack sessions by date
     haystack_sessions2 = list(zip(haystack_dates, haystack_sessions))
