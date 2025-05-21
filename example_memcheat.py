@@ -53,6 +53,24 @@ def update_facts(haydate, conv, question, question_date, old_facts):
     return new_facts
 
 def process_question(haystack_sessions: list[list[dict]], question: str, question_date:str, haystack_dates: list[str]) -> str:
+    # Check sessions for duplicate sessions
+    dupes = []
+    for i in range(len(haystack_sessions)):
+        for j in range(i + 1, len(haystack_sessions)):
+            if haystack_dates[i] == haystack_dates[j]:
+                dupes.append((i, j))
+    if dupes:
+        print(f"DUPLICATE SESSIONS FOUND: {dupes}")
+        # Reconstruct a new haystack without the duplicates
+        delenda = {j if i < j else i for i, j in dupes}
+        new_haystack = []
+        new_timestamps = []
+        for i in range(len(haystack_sessions)):
+            if i not in delenda:
+                new_haystack.append(haystack_sessions[i])
+                new_timestamps.append(haystack_dates[i])
+        haystack_sessions = new_haystack
+        haystack_dates = new_timestamps
     # Process the haystack in light of the question.
     # Sort the haystack sessions by date
     haystack_sessions2 = list(zip(haystack_dates, haystack_sessions))
