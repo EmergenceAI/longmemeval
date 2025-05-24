@@ -1,0 +1,10 @@
+
+# First result from Agent001: Abysmal!  And with high latency!
+Evaluated 500 hypotheses with 47 successes.  Accuracy: 0.0940
+Accuracy: 0.094
+	knowledge-update           :  8.97% (78 obs)
+	single-session-preference  :  6.67% (30 obs)
+	single-session-user        :  8.57% (70 obs)
+	temporal-reasoning         :  6.02% (133 obs)
+	single-session-assistant   : 23.21% (56 obs)
+	multi-session              :  8.27% (133 obs)

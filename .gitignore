@@ -3,3 +3,5 @@ data/
 
 messages.pkl
 messages_embedding.index
+
+*.xlsx
