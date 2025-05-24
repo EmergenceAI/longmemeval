@@ -34,13 +34,14 @@ class PaulThing:
         # Hack: use question as key.  (Assert that each question is unique.)
         questions = [item['question'] for item in sheet_dict['items']]
         assert len(questions) == len(set(questions)), "Questions are not unique!"
-        q_dict = {item['question']: item for item in sheet_dict['items']}
+        # q_dict = {item['question']: item for item in sheet_dict['items']}
         # Total hack to get session ids:
         haystacks = json.load(open(f'{DATA_DIR}/{FILENAME}'))
         self.q_info = {h['question']: {'haystack_session_ids': h['haystack_session_ids'], 'haystack_dates': h['haystack_dates']} for h in haystacks}
         print(f"Loaded {len(self.sessions)} sessions.")
 
     def process_question(self, haystack_sessions: list[list[dict]], question: str, question_date:str, haystack_dates: list[str]) -> str:
+        # Note: haystack_sessions isn't used since we get the sessions from self.
         # Get the relevant session information
         haystack_session_ids, haystack_dates_2 = self.q_info[question]['haystack_session_ids'], self.q_info[question]['haystack_dates']
         assert haystack_dates == haystack_dates_2, f"Haystack dates do not match: {haystack_dates} != {haystack_dates_2}"
@@ -92,10 +93,7 @@ class PaulThing:
 
 def test():
     # For Marc's REPL debugging.
-    import json
-    DATA_DIR = './data/'
-    filename = 'longmemeval_s.json' # longmemeval_m.json, longmemeval_oracle.json
-    haystacks = json.load(open(f'{DATA_DIR}/{filename}'))
+    haystacks = json.load(open(f'{DATA_DIR}/{FILENAME}'))
     haystack = haystacks[0]
     question_id = haystack['question_id']
     question = haystack['question']
@@ -103,7 +101,8 @@ def test():
     haystack_dates = haystack['haystack_dates']
     haystack_sessions = haystack['haystack_sessions']
     answer = haystack['answer']
-
+    # This is to get my linter to shut up about unused vars.
+    print([len(question_id, question, question_date, haystack_dates, haystack_sessions, answer)])
 
 ################################################################
 import os, inspect, hashlib
