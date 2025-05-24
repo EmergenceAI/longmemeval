@@ -33,6 +33,7 @@ Accuracy: 0.61
 
 # GuessBot (does guess Family Feud style, with no context, just the question)
 Evaluated 500 hypotheses with 94 successes.  Accuracy: 0.1880
+Accuracy: 0.1880
 	knowledge-update           : 19.23% (78 obs)
 	multi-session              : 10.53% (133 obs)
 	single-session-assistant   : 23.21% (56 obs)
