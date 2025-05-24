@@ -173,4 +173,4 @@ def evaluate_qa(hypotheses:list[dict], evaluator:Evaluator):
         logs.append(label)
         qtype2acc[evaluator.qid2qtype[entry['question_id']]].append(1 if label else 0)
     print('Accuracy:', round(np.mean(logs).item(), 4))
-    for k,v in qtype2acc.items(): print(f'\t{k:<27}: {round(np.mean(v), 4):>6.2%} ({len(v)} obs)')
+    for k,v in sorted(qtype2acc.items()): print(f'\t{k:<27}: {round(np.mean(v), 4):>6.2%} ({len(v)} obs)')

@@ -9,16 +9,6 @@ temporal-reasoning        133 : 45.1%   62.4%  *78.20%*
 Total                     500 : 59.17%  71.2%  *82.00%*
 
 
-# First result from Agent001: Abysmal!  And with high latency!  2025/05/22
-Evaluated 500 hypotheses with 47 successes.  Accuracy: 0.0940
-Accuracy: 0.094
-	knowledge-update           :  8.97% (78 obs)
-	multi-session              :  8.27% (133 obs)
-	single-session-assistant   : 23.21% (56 obs)
-	single-session-preference  :  6.67% (30 obs)
-	single-session-user        :  8.57% (70 obs)
-	temporal-reasoning         :  6.02% (133 obs)
-
 # Memcheat 2025/05/22
 125.21s/item
 Evaluated 500 hypotheses with 410 successes.  Accuracy: 0.8200
@@ -30,7 +20,6 @@ Accuracy: 0.82
 	single-session-user        : 95.71% (70 obs)
 	temporal-reasoning         : 78.20% (133 obs)
 
-
 # Paulbot 2025/05/24
 100% 500/500 [35:32<00:00,  4.26s/it]
 Evaluated 500 hypotheses with 305 successes.  Accuracy: 0.6100
@@ -41,3 +30,32 @@ Accuracy: 0.61
 	single-session-preference  : 36.67% (30 obs)
 	single-session-user        : 47.14% (70 obs)
 	temporal-reasoning         : 57.89% (133 obs)
+
+# GuessBot (does guess Family Feud style, with no context, just the question)
+Accuracy: 0.188
+	knowledge-update           : 19.23% (78 obs)
+	multi-session              : 10.53% (133 obs)
+	single-session-assistant   : 23.21% (56 obs)
+	single-session-preference  : 13.33% (30 obs)
+	single-session-user        : 20.00% (70 obs)
+	temporal-reasoning         : 25.56% (133 obs)
+
+# First result from Agent001: Abysmal!  And with high latency!  2025/05/22
+Evaluated 500 hypotheses with 47 successes.  Accuracy: 0.0940
+Accuracy: 0.094
+	knowledge-update           :  8.97% (78 obs)
+	multi-session              :  8.27% (133 obs)
+	single-session-assistant   : 23.21% (56 obs)
+	single-session-preference  :  6.67% (30 obs)
+	single-session-user        :  8.57% (70 obs)
+	temporal-reasoning         :  6.02% (133 obs)
+
+# DontKnowBot (repeats question and says 'I don't know the answer to that!'
+Evaluated 500 hypotheses with 29 successes.  Accuracy: 0.0580
+Accuracy: 0.058
+	knowledge-update           :  6.41% (78 obs)
+	multi-session              :  9.02% (133 obs)
+	single-session-assistant   :  0.00% (56 obs)
+	single-session-preference  :  0.00% (30 obs)
+	single-session-user        :  8.57% (70 obs)
+	temporal-reasoning         :  4.51% (133 obs)
