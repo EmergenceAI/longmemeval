@@ -1,5 +1,15 @@
+#                         obs   gpt-4o   Zep   Ours 2025/05/22
+single-session-preference  30 : 20.0%  *56.7%*  46.67%
+temporal-reasoning        133 : 45.1%   62.4%  *78.20%*
+knowledge-update           78 : 78.2%   83.3%  *91.03%*
+single-session-user        70 : 81.4%   92.9%  *95.71%*
+single-session-assistant   56 : 94.6%   80.4%  *96.43%*
+multi-session             133 : 44.3%   57.9%  *75.19%*
+-------------------------------------------------------
+Total                     500 : 59.17%  71.2%  *82.00%*
 
-# First result from Agent001: Abysmal!  And with high latency!
+
+# First result from Agent001: Abysmal!  And with high latency!  2025/05/22
 Evaluated 500 hypotheses with 47 successes.  Accuracy: 0.0940
 Accuracy: 0.094
 	knowledge-update           :  8.97% (78 obs)
@@ -8,3 +18,26 @@ Accuracy: 0.094
 	temporal-reasoning         :  6.02% (133 obs)
 	single-session-assistant   : 23.21% (56 obs)
 	multi-session              :  8.27% (133 obs)
+
+# Memcheat 2025/05/22
+125.21s/item
+Evaluated 500 hypotheses with 410 successes.  Accuracy: 0.8200
+Accuracy: 0.82
+	single-session-preference  : 46.67% (30 obs)
+	temporal-reasoning         : 78.20% (133 obs)
+	knowledge-update           : 91.03% (78 obs)
+	single-session-user        : 95.71% (70 obs)
+	single-session-assistant   : 96.43% (56 obs)
+	multi-session              : 75.19% (133 obs)
+
+
+# Paulbot 2025/05/24
+100% 500/500 [35:32<00:00,  4.26s/it]
+Evaluated 500 hypotheses with 305 successes.  Accuracy: 0.6100
+Accuracy: 0.61
+	multi-session              : 56.39% (133 obs)
+	single-session-assistant   : 82.14% (56 obs)
+	knowledge-update           : 80.77% (78 obs)
+	single-session-preference  : 36.67% (30 obs)
+	single-session-user        : 47.14% (70 obs)
+	temporal-reasoning         : 57.89% (133 obs)

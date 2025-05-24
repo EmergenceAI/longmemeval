@@ -90,4 +90,28 @@ def main2():
         zipped_m_set = {str(x) for x in zipped_m}
         assert zipped_s_set <= zipped_m_set, f"Haystack {i} has different sessions"
 
+
+def main3():
+
+    #
+    allsessions = {} # map id to session
+    for haystack in haystacks:
+        haystack_sessions = haystack['haystack_sessions']
+        haystack_session_ids = haystack['haystack_session_ids']
+        assert len(haystack_sessions) == len(haystack_session_ids), f"Haystack session ids and dates do not match: {len(haystack_sessions)} != {len(haystack_session_ids)}"
+        for idx, session in zip(haystack_session_ids, haystack_sessions):
+            if idx not in allsessions: allsessions[idx] = session
+            else:
+                assert allsessions[idx] == session, f"Session {idx} does not match: {allsessions[idx]} != {session}"
+
+    missing = open('../missing_sessions.txt', 'r').readlines()
+    missing = [x.strip() for x in missing]
+
+    for missed in missing:
+        assert missed in allsessions, f"Missing session {missing} not in allsessions."
+        session = allsessions[missed]
+        if len(session) > 0:
+            print(f"Turns is {len(session)}, {missed}")
+    
+
 if __name__ == '__main__': main()
