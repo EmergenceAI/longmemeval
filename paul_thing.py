@@ -102,12 +102,11 @@ def test():
     haystack_sessions = haystack['haystack_sessions']
     answer = haystack['answer']
     # This is to get my linter to shut up about unused vars.
-    print([len(question_id, question, question_date, haystack_dates, haystack_sessions, answer)])
+    print(len([question_id, question, question_date, haystack_dates, haystack_sessions, answer]))
 
 ################################################################
 import os, inspect, hashlib
 from utils import Evaluator, predict_with_early_stopping, evaluate_qa
-
 
 def main():
     paul_thing = PaulThing()
@@ -134,7 +133,7 @@ def main():
     print(f'process_func module: {process_func.__module__}')
     print(f'process_func file: {inspect.getfile(process_func)}')
     #
-    hypotheses, num_success, nobs = predict_with_early_stopping(haystacks, process_func, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=True)
+    hypotheses, num_success, nobs = predict_with_early_stopping(haystacks, process_func, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=False)
     print(f'Evaluated {nobs} hypotheses with {num_success} successes.  Accuracy: {num_success / nobs:.4f}')
     evaluate_qa(hypotheses, evaluator)
 
