@@ -20,6 +20,17 @@ Accuracy: 0.82
 	single-session-user        : 95.71% (70 obs)
 	temporal-reasoning         : 78.20% (133 obs)
 
+# Full contenxt 2025/05/25 example_fullcontext.py
+100% 500/500 [1:26:55<00:00, 10.43s/it]
+Evaluated 500 hypotheses with 319 successes.  Accuracy: 0.6380
+Accuracy: 0.638
+	knowledge-update           : 75.64% (78 obs)
+	multi-session              : 47.37% (133 obs)
+	single-session-assistant   : 98.21% (56 obs)
+	single-session-preference  : 13.33% (30 obs)
+	single-session-user        : 82.86% (70 obs)
+	temporal-reasoning         : 60.15% (133 obs)
+
 # Paulbot 2025/05/24
 100% 500/500 [35:32<00:00,  4.26s/it]
 Evaluated 500 hypotheses with 305 successes.  Accuracy: 0.6100
