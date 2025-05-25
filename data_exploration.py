@@ -92,7 +92,8 @@ def main2():
 
 
 def main3():
-
+    filename = 'longmemeval_s.json'
+    haystacks = json.load(open(f'{DATA_DIR}/{filename}'))
     #
     allsessions = {} # map id to session
     for haystack in haystacks:
@@ -104,14 +105,21 @@ def main3():
             else:
                 assert allsessions[idx] == session, f"Session {idx} does not match: {allsessions[idx]} != {session}"
 
-    missing = open('../missing_sessions.txt', 'r').readlines()
+    missing = open('./logs/missing_sessions.txt', 'r').readlines()
     missing = [x.strip() for x in missing]
 
+    big_miss = []
     for missed in missing:
         assert missed in allsessions, f"Missing session {missing} not in allsessions."
         session = allsessions[missed]
         if len(session) > 0:
             print(f"Turns is {len(session)}, {missed}")
-    
+        if len(session) > 2:
+            big_miss.append(session)
+
+    for miss in big_miss:
+        print('\n\n; Next conv' + '='*20 + '\n')
+        for turn in miss:
+            print(f'\n# {turn["role"]}: \n\n{turn["content"]}')
 
 if __name__ == '__main__': main()
