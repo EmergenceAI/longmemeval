@@ -31,7 +31,7 @@ Accuracy: 0.638
 	single-session-user        : 82.86% (70 obs)
 	temporal-reasoning         : 60.15% (133 obs)
 
-# Paulbot 2025/05/24
+# Paulbot 'all grounded' 2025/05/24
 100% 500/500 [35:32<00:00,  4.26s/it]
 Evaluated 500 hypotheses with 305 successes.  Accuracy: 0.6100
 Accuracy: 0.61
@@ -42,7 +42,7 @@ Accuracy: 0.61
 	single-session-user        : 47.14% (70 obs)
 	temporal-reasoning         : 57.89% (133 obs)
 
-# Paulbot 2025/05/25
+# Paulbot 'fallback' 2025/05/25
 Evaluated 500 hypotheses with 304 successes.  Accuracy: 0.6080
 Accuracy: 0.608
 	knowledge-update           : 80.77% (78 obs)
@@ -51,6 +51,17 @@ Accuracy: 0.608
 	single-session-preference  : 36.67% (30 obs)
 	single-session-user        : 45.71% (70 obs)
 	temporal-reasoning         : 57.89% (133 obs)
+
+# Paulbot 'sentences'
+100% 500/500 [28:23<00:00,  3.41s/it]
+Evaluated 500 hypotheses with 217 successes.  Accuracy: 0.4340
+Accuracy: 0.434
+	knowledge-update           : 39.74% (78 obs)
+	multi-session              : 30.08% (133 obs)
+	single-session-assistant   : 66.07% (56 obs)
+	single-session-preference  : 33.33% (30 obs)
+	single-session-user        : 58.57% (70 obs)
+	temporal-reasoning         : 43.61% (133 obs)
 
 # GuessBot (does guess Family Feud style, with no context, just the question)
 Accuracy: 0.188
