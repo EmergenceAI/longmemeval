@@ -5,6 +5,8 @@ from utils import callgpt
 
 PAUL_FILENAME = 'paul_thing_20250523.xlsx'
 SHEETNAME = 'Marc'
+PAULKEY = 'grounded'
+# PAULKEY = 'sentence'
 
 # The test data filename
 DATA_DIR = './data/'
@@ -62,8 +64,10 @@ class PaulThing:
         for date, session in knowledge:
             facts = []
             for extract in session:
-                assert 'grounded' in extract, f"Extract does not have 'grounded' key: {extract}"
-                facts.append(extract['grounded'])
+                # assert 'grounded' in extract, f"Extract does not have 'grounded' key: {extract}"
+                # facts.append(extract['grounded'])
+                assert PAULKEY in extract, f"Extract does not have '{PAULKEY}' key: {extract}"
+                facts.append(extract[PAULKEY])
             groundeds.append((date, facts))
         # Now we have a list, sorted by date with each item like this.
         # ('2023/05/20 (Sat) 02:21',
