@@ -6,6 +6,7 @@ from utils import callgpt
 PAUL_FILENAME = 'paul_thing_20250523.xlsx'
 SHEETNAME = 'Marc'
 PAULKEY = 'grounded'
+PAULKEY2 = 'sentence'
 # PAULKEY = 'sentence'
 
 # The test data filename
@@ -64,9 +65,14 @@ class PaulThing:
         for date, session in knowledge:
             facts = []
             for extract in session:
-                # assert 'grounded' in extract, f"Extract does not have 'grounded' key: {extract}"
-                # facts.append(extract['grounded'])
                 assert PAULKEY in extract, f"Extract does not have '{PAULKEY}' key: {extract}"
+                fact = extract[PAULKEY]
+                if type(fact) is not str:
+                    assert PAULKEY2 in extract, f"Extract does not have '{PAULKEY2}' key: {extract}"
+                    fact = extract[PAULKEY2]
+                    if type(fact) is not str:
+                        print(f"Fact is not a string: {fact}")
+                        continue
                 facts.append(extract[PAULKEY])
             groundeds.append((date, facts))
         # Now we have a list, sorted by date with each item like this.
@@ -146,7 +152,7 @@ def main():
     print(f'process_func module: {process_func.__module__}')
     print(f'process_func file: {inspect.getfile(process_func)}')
     #
-    hypotheses, num_success, nobs = predict_with_early_stopping(haystacks, process_func, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=False)
+    hypotheses, num_success, nobs = predict_with_early_stopping(haystacks, process_func, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=True)
     print(f'Evaluated {nobs} hypotheses with {num_success} successes.  Accuracy: {num_success / nobs:.4f}')
     evaluate_qa(hypotheses, evaluator)
 
