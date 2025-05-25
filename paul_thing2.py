@@ -3,12 +3,12 @@
 import pandas as pd, json
 from utils import callgpt
 
-PAUL_FILENAME = 'paul_thing_20250523.xlsx'
-# PAUL_FILENAME = 'paul_thing_20250525.xlsx'
-SHEETNAME = 'Marc'
+# PAUL_FILENAME = 'paul_thing_20250523.xlsx'
+PAUL_FILENAME = 'paul_thing_20250525.xlsx'
 PAULKEY = 'grounded'
 PAULKEY2 = 'sentence'
 # PAULKEY = 'sentence'
+SHEETNAME = 'fact'
 
 # The test data filename
 DATA_DIR = './data/'
@@ -28,10 +28,11 @@ class PaulThing:
         # Get the extracted sessions.
         self.sessions = {}
         known_keys = {'session', 'sentence', 'grounded'}
+        # ['items', 'sessions', 'fact', 'episodes']
         for extract in sheet_dict[SHEETNAME]:
             if extract['session'] not in self.sessions:
                 self.sessions[extract['session']] = []
-            assert set(extract.keys()) == known_keys, f"Keys are not as expected: {extract.keys()}"
+            assert set(extract.keys()) >= known_keys, f"Keys are not as expected: {extract.keys()}"
             new_extract = {k: extract[k] for k in extract.keys() if k != 'session'}
             self.sessions[extract['session']].append(new_extract)
         # Need to map h to list of sessions and dates.

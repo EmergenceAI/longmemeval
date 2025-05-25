@@ -20,6 +20,17 @@ Accuracy: 0.82
 	single-session-user        : 95.71% (70 obs)
 	temporal-reasoning         : 78.20% (133 obs)
 
+# Paulbot2 'fallback' with updated data 2025/05/25
+100% 500/500 [27:59<00:00,  3.36s/it]
+Evaluated 500 hypotheses with 330 successes.  Accuracy: 0.6600
+Accuracy: 0.66
+	knowledge-update           : 76.92% (78 obs)
+	multi-session              : 54.14% (133 obs)
+	single-session-assistant   : 82.14% (56 obs)
+	single-session-preference  : 43.33% (30 obs)
+	single-session-user        : 85.71% (70 obs)
+	temporal-reasoning         : 59.40% (133 obs)
+
 # Full contenxt 2025/05/25 example_fullcontext.py
 100% 500/500 [1:26:55<00:00, 10.43s/it]
 Evaluated 500 hypotheses with 319 successes.  Accuracy: 0.6380
