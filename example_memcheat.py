@@ -93,7 +93,7 @@ def process_question(haystack_sessions: list[list[dict]], question: str, questio
         haydate, conv = haystack_sessions2[i]
         new_facts = update_facts(haydate, conv, question, question_date, old_facts)
         old_facts += new_facts
-        print(f"Updated facts for {haydate}:\n{new_facts}")
+        # print(f"Updated facts for {haydate}:\n{new_facts}")
         i += 1
 
     # Can add a loop ReadAgent style, where the agent can go back to specific convs for more facts.

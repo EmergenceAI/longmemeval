@@ -53,7 +53,7 @@ class PaulThing:
         knowledge = []
         for idx, date in ids_dates:
             if idx not in self.sessions:
-                print(f"Warning: Session {idx} not found in sessions.")
+                # print(f"Warning: Session {idx} not found in sessions.")
                 continue
             knowledge.append((date, self.sessions[idx]))
         ################ Done processing..  Now let's use the knowledge.
@@ -91,6 +91,14 @@ class PaulThing:
         answer = callgpt([{'role': 'system', 'content': f'Given the facts and dates below, please succinctly answer the question. \n\n FACTS:\n{allfacts}\n\nQUESTION: {question}\n\nQUESTION_DATE: {question_date}'}], model='gpt-4o', max_tokens=2048)
         return answer
 
+# This is the function that will be called from the outside.
+def process_question(haystack_sessions: list[list[dict]], question: str, question_date:str, haystack_dates: list[str]) -> str:
+    if process_question.pfunc is None:
+        # Make my func the pfunc.  I wants to get func-ed up.
+        process_question.pfunc = PaulThing()
+    return process_question.pfunc.process_question(haystack_sessions, question, question_date, haystack_dates)
+process_question.pfunc = None
+
 def test():
     # For Marc's REPL debugging.
     haystacks = json.load(open(f'{DATA_DIR}/{FILENAME}'))
@@ -109,6 +117,7 @@ import os, inspect, hashlib
 from utils import Evaluator, predict_with_early_stopping, evaluate_qa
 
 def main():
+    print('Warning: You should be calling this from main.py instead.')
     paul_thing = PaulThing()
     process_func = paul_thing.process_question
     filename = 'longmemeval_s.json' # longmemeval_m.json, longmemeval_oracle.json
