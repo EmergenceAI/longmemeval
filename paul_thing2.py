@@ -4,7 +4,7 @@ import pandas as pd, json
 from utils import callgpt
 
 # PAUL_FILENAME = 'paul_thing_20250523.xlsx'
-PAUL_FILENAME = 'paul_thing_20250525.xlsx'
+PAUL_FILENAME = 'paul_thing_20250525_2.xlsx'
 PAULKEY = 'grounded'
 PAULKEY2 = 'sentence'
 # PAULKEY = 'sentence'
