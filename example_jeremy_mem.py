@@ -13,8 +13,8 @@ def hello_world_process_question(haystack_sessions: list[list[dict]], question: 
     msg_texts, msg_embeddings = [], []
     for idx, session in enumerate(haystack_sessions):
         for message in session:
-            # if 'content' in message and 'role' in message:    
-            if 'content' in message and message['role'] == 'user':  # for just user messages, but should be all messages probably
+            # if 'content' in message and message['role'] == 'user':  # for just user messages, but should be all messages probably
+            if 'content' in message and 'role' in message:
                 role = message['role']
                 content = message['content']
                 timestamp = haystack_dates[idx]
@@ -35,15 +35,15 @@ def hello_world_process_question(haystack_sessions: list[list[dict]], question: 
 
 
     # Save index and messages
-    faiss.write_index(index, "messages_embedding.index")  
+    faiss.write_index(index, "messages_embedding.index")
     with open("messages.pkl", "wb") as f:
-        pickle.dump(msg_texts, f)          
+        pickle.dump(msg_texts, f)
 
 
     top_k_messages = search(question, k=3)
 
     result = callgpt(
-        model="gpt-4o", 
+        model="gpt-4o",
         max_tokens=250,
         messages=[
             {"role": "system", "content": "Please answer the question based on the context provided. Here are some past messages that might be relevant:\n" + "\n".join(top_k_messages)},
@@ -54,6 +54,3 @@ def hello_world_process_question(haystack_sessions: list[list[dict]], question: 
     print(f"Result: {result}")
 
     return result
-        
-
-

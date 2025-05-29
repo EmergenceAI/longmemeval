@@ -149,6 +149,9 @@ def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0
         num_success += result
         nobs += 1
         if verbose:
+            tqdm.tqdm.write(f'\nQuestion: {haystack["question"]}')
+            tqdm.tqdm.write(f'Hypothesis: {hypothesis["hypothesis"]}')
+            tqdm.tqdm.write(f'Ground truth: {haystack["answer"]}')
             tqdm.tqdm.write(f'Processed {nobs} trials with {num_success} successes.  The last result was {result}.')
         if stop_early(num_success, nobs, confidence, b_successes, b_nobs, tolerance):
             tqdm.tqdm.write(f'Stopping early at {nobs} trials with {num_success} successes.')
@@ -170,4 +173,4 @@ def evaluate_qa(hypotheses:list[dict], evaluator:Evaluator):
         logs.append(label)
         qtype2acc[evaluator.qid2qtype[entry['question_id']]].append(1 if label else 0)
     print('Accuracy:', round(np.mean(logs).item(), 4))
-    for k,v in qtype2acc.items(): print(f'\t{k:<27}: {round(np.mean(v), 4):>6.2%} ({len(v)} obs)')
+    for k,v in sorted(qtype2acc.items()): print(f'\t{k:<27}: {round(np.mean(v), 4):>6.2%} ({len(v)} obs)')
