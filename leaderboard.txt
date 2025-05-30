@@ -85,6 +85,18 @@ Accuracy: 0.434
 	single-session-user        : 58.57% (70 obs)
 	temporal-reasoning         : 43.61% (133 obs)
 
+#PrakharBot( Concatenate all conversations into a single prompt and sends this to GPT-4o with questions, similar to full context bot but smaller prompt and no extra line breaks)
+100%|███████████████████████████████████████| 500/500 [3:21:08<00:00, 24.14s/it]
+Evaluated 500 hypotheses with 127 successes.  Accuracy: 0.2540
+Accuracy: 0.254
+	knowledge-update           : 33.33% (78 obs)
+	multi-session              : 19.55% (133 obs)
+	single-session-assistant   : 21.43% (56 obs)
+	single-session-preference  : 10.00% (30 obs)
+	single-session-user        : 37.14% (70 obs)
+	temporal-reasoning         : 25.56% (133 obs)
+
+
 # GuessBot (does guess Family Feud style, with no context, just the question)
 Accuracy: 0.188
 	knowledge-update           : 19.23% (78 obs)
