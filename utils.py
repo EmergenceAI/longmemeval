@@ -172,12 +172,13 @@ def evaluate_qa(hypotheses:list[dict], evaluator:Evaluator):
         label = entry['label']
         logs.append(label)
         qtype2acc[evaluator.qid2qtype[entry['question_id']]].append(1 if label else 0)
+    metrics = ''
     print('Accuracy:', round(np.mean(logs).item(), 4))
-    results = []
+    metrics += f'Accuracy: {round(np.mean(logs).item(), 4)}\n'
     for k,v in sorted(qtype2acc.items()):
-        results.append((k, v))
+        metrics += f'{k:<27}: {round(np.mean(v), 4):>6.2%} ({len(v)} obs)\n'
         print(f'\t{k:<27}: {round(np.mean(v), 4):>6.2%} ({len(v)} obs)')
-    return results
+    return metrics
 
 ################ Logging stuff
 import uuid
