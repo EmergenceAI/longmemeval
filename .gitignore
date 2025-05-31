@@ -1,5 +1,6 @@
 cache/
 data/
+runs/
 
 messages.pkl
 messages_embedding.index
