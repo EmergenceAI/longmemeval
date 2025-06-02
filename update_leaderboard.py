@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Update the leaderboard.txt file in the runs/ directory with the latest results.
 import json, os, re
 
