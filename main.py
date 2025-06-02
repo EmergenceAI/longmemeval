@@ -37,7 +37,7 @@ def run_expt():
 
 def main():
     # This must be run *before* run_expt() so that the logger is initialized with the proper checkpoint and timestamps.
-    dumblogger = DumbLogger(REPO_PATH, LOG_DIR)
+    dumblogger = DumbLogger(REPO_PATH, LOG_DIR, process_func.__module__, process_func.__name__)
     metrics = run_expt()
     dumblogger.log_it_up(metrics)
 
