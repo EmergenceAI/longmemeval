@@ -16,7 +16,7 @@
 # import json, os, inspect, hashlib
 # from utils import Evaluator, predict_with_early_stopping, evaluate_qa
 #
-# DATA_DIR = '/home/pdx/Desktop/longmemeval/data/'
+#DATA_DIR = os.path.expanduser("~/Desktop/longmemeval/data/")
 #
 # def main():
 #
