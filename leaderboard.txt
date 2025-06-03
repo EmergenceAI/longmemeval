@@ -65,7 +65,6 @@ Accuracy: 0.61
 	temporal-reasoning         : 57.89% (133 obs)
 
 # PrakharLTM_v2 (Add turn-based RAG pipeline with CoT-based structured summarization and fact-grounded answering without haystack_dates)
-
 Evaluated 500 hypotheses with 304 successes. Accuracy: 0.6080  [14:15:54<00:00, 102.71s/it]
 Accuracy: 0.608
 	knowledge-update           : 65.38% (78 obs)
