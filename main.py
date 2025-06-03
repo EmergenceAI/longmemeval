@@ -56,7 +56,7 @@ from pathlib import Path
 import json, os, inspect, hashlib
 from utils import Evaluator, predict_with_early_stopping, evaluate_qa
 
-DATA_DIR = '/home/pdx/Desktop/longmemeval/data/'  # adjust if your data is elsewhere
+DATA_DIR = os.path.expanduser("~/Desktop/longmemeval/data/")
 
 def main():
     filename = 'longmemeval_s.json'  # change to longmemeval_m.json or _oracle.json if needed
