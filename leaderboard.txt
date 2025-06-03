@@ -66,7 +66,7 @@ Accuracy: 0.61
 
 # PrakharLTM_v2 (Add turn-based RAG pipeline with CoT-based structured summarization and fact-grounded answering)
 
-Evaluated 500 hypotheses with 304 successes. Accuracy: 0.6080
+Evaluated 500 hypotheses with 304 successes. Accuracy: 0.6080  [14:15:54<00:00, 102.71s/it]
 Accuracy: 0.608
 	knowledge-update           : 65.38% (78 obs)
 	multi-session              : 53.38% (133 obs)
