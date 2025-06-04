@@ -6,7 +6,8 @@
 # from algos.example_fullcontext import process_question as process_func
 # from algos.example_memcheat import process_question as process_func
 # from algos.paul_thing import process_question as process_func
-from algos.PrakharLTM_V3 import process_question as process_func
+from algos.paul_thing3 import process_question as process_func
+# from algos.PrakharLTM_V3 import process_question as process_func
 
 ### Edit ^^^ to point to your function.
 
