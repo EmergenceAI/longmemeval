@@ -1,11 +1,13 @@
 # from algos.example_function import hello_world_process_question as process_func
 # from algos.example_guessbot import hello_world_process_question as process_func
-from algos.example_prakhar_bot import process_question as process_func
+# from algos.example_prakhar_bot import process_question as process_func
 # from algos.example_rest_api import call_rest_endpoint as process_func
 # from algos.example_jeremy_mem import hello_world_process_question as process_func
 # from algos.example_fullcontext import process_question as process_func
 # from algos.example_memcheat import process_question as process_func
 # from algos.paul_thing import process_question as process_func
+from algos.paul_thing3 import process_question as process_func
+# from algos.PrakharLTM_V3 import process_question as process_func
 
 ### Edit ^^^ to point to your function.
 

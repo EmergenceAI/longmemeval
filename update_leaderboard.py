@@ -28,5 +28,5 @@ def main():
     # Write a new leaderboard.txt in runs/ .  Delete the old one if it exists.
     with open('runs/leaderboard.txt', 'w') as lfile:
         lfile.write('\n\n'.join(leaderboard))
-   
+
 if __name__ == '__main__': main()
