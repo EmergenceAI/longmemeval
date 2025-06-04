@@ -1,4 +1,4 @@
-from embeddings import embed_message, search
+from .embeddings import embed_message, search
 import numpy as np
 import faiss
 import pickle

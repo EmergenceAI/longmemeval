@@ -172,5 +172,42 @@ def evaluate_qa(hypotheses:list[dict], evaluator:Evaluator):
         label = entry['label']
         logs.append(label)
         qtype2acc[evaluator.qid2qtype[entry['question_id']]].append(1 if label else 0)
+    metrics = ''
     print('Accuracy:', round(np.mean(logs).item(), 4))
-    for k,v in sorted(qtype2acc.items()): print(f'\t{k:<27}: {round(np.mean(v), 4):>6.2%} ({len(v)} obs)')
+    metrics += f'Accuracy: {round(np.mean(logs).item(), 4)}\n'
+    for k,v in sorted(qtype2acc.items()):
+        metrics += f'{k:<27}: {round(np.mean(v), 4):>6.2%} ({len(v)} obs)\n'
+        print(f'\t{k:<27}: {round(np.mean(v), 4):>6.2%} ({len(v)} obs)')
+    return metrics
+
+################ Logging stuff
+import uuid
+from datetime import datetime
+from git import Repo, InvalidGitRepositoryError
+
+class DumbLogger:
+    def __init__(self, repo_path, log_dir, module_name, func_name):
+        # Ensure the git repository is up to date.
+        repo = Repo(repo_path, search_parent_directories=True)
+        os.makedirs(log_dir, exist_ok=True)
+        if repo.is_dirty():
+            raise RuntimeError("Git working directory is dirty. Please commit before running.")
+        try:
+            repo = Repo(repo_path, search_parent_directories=True)
+            commit = repo.head.commit.hexsha
+            dirty = repo.is_dirty()
+            branch = repo.active_branch.name
+        except InvalidGitRepositoryError: raise RuntimeError("Not a git repository.")
+        except Exception as e: raise RuntimeError(f"Failed to get git info: {e}")
+        self.git_info = {"commit": commit, "dirty": dirty, "branch": branch}
+        self.start_time = datetime.now()
+        self.run_id = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
+        self.log_dir = log_dir
+        self.description = f"{module_name}.{func_name}"
+    def log_it_up(self, metrics):
+        end_time = datetime.now()
+        git_info, run_id, log_dir = self.git_info, self.run_id, self.log_dir
+        data = {"id": run_id, "timestamp": datetime.now().isoformat(), "description": self.description, "git": git_info, "metrics": metrics, "total_time": (end_time - self.start_time).total_seconds()}
+        out_path = os.path.join(log_dir, f"{run_id}.json")
+        with open(out_path, "w") as f: json.dump(data, f, indent=2)
+        print(f"[+] Logged run {run_id} to {out_path}")

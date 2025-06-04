@@ -1,4 +1,5 @@
 #                         obs   gpt-4o   Zep   Ours 2025/05/22
+Accuracy: 10000
 knowledge-update           78 : 78.2%   83.3%  *91.03%*
 multi-session             133 : 44.3%   57.9%  *75.19%*
 single-session-assistant   56 : 94.6%   80.4%  *96.43%*
@@ -13,23 +14,23 @@ Total                     500 : 59.17%  71.2%  *82.00%*
 125.21s/item
 Evaluated 500 hypotheses with 410 successes.  Accuracy: 0.8200
 Accuracy: 0.82
-	knowledge-update           : 91.03% (78 obs)
-	multi-session              : 75.19% (133 obs)
-	single-session-assistant   : 96.43% (56 obs)
-	single-session-preference  : 46.67% (30 obs)
-	single-session-user        : 95.71% (70 obs)
-	temporal-reasoning         : 78.20% (133 obs)
+knowledge-update           : 91.03% (78 obs)
+multi-session              : 75.19% (133 obs)
+single-session-assistant   : 96.43% (56 obs)
+single-session-preference  : 46.67% (30 obs)
+single-session-user        : 95.71% (70 obs)
+temporal-reasoning         : 78.20% (133 obs)
 
 # Paulbot2 'fallback' with updated data 2025/05/25
 100% 500/500 [27:59<00:00,  3.36s/it]
 Evaluated 500 hypotheses with 330 successes.  Accuracy: 0.6600
 Accuracy: 0.66
-	knowledge-update           : 76.92% (78 obs)
-	multi-session              : 54.14% (133 obs)
-	single-session-assistant   : 82.14% (56 obs)
-	single-session-preference  : 43.33% (30 obs)
-	single-session-user        : 85.71% (70 obs)
-	temporal-reasoning         : 59.40% (133 obs)
+knowledge-update           : 76.92% (78 obs)
+multi-session              : 54.14% (133 obs)
+single-session-assistant   : 82.14% (56 obs)
+single-session-preference  : 43.33% (30 obs)
+single-session-user        : 85.71% (70 obs)
+temporal-reasoning         : 59.40% (133 obs)
 
 #PrakharLTM_V3 ( Turn level retrival with haystack_dates included)
 Evaluated 500 hypotheses with 328 successes. Accuracy: 0.6560 [7:59:02<00:00, 57.49s/it]
@@ -45,34 +46,34 @@ Accuracy: 0.656
 100% 500/500 [22:07<00:00,  2.65s/it]
 Evaluated 500 hypotheses with 326 successes.  Accuracy: 0.6520
 Accuracy: 0.652
-	knowledge-update           : 75.64% (78 obs)
-	multi-session              : 54.14% (133 obs)
-	single-session-assistant   : 82.14% (56 obs)
-	single-session-preference  : 36.67% (30 obs)
-	single-session-user        : 85.71% (70 obs)
-	temporal-reasoning         : 58.65% (133 obs)
+knowledge-update           : 75.64% (78 obs)
+multi-session              : 54.14% (133 obs)
+single-session-assistant   : 82.14% (56 obs)
+single-session-preference  : 36.67% (30 obs)
+single-session-user        : 85.71% (70 obs)
+temporal-reasoning         : 58.65% (133 obs)
 
 # Full contenxt 2025/05/25 example_fullcontext.py
 100% 500/500 [1:26:55<00:00, 10.43s/it]
 Evaluated 500 hypotheses with 319 successes.  Accuracy: 0.6380
 Accuracy: 0.638
-	knowledge-update           : 75.64% (78 obs)
-	multi-session              : 47.37% (133 obs)
-	single-session-assistant   : 98.21% (56 obs)
-	single-session-preference  : 13.33% (30 obs)
-	single-session-user        : 82.86% (70 obs)
-	temporal-reasoning         : 60.15% (133 obs)
+knowledge-update           : 75.64% (78 obs)
+multi-session              : 47.37% (133 obs)
+single-session-assistant   : 98.21% (56 obs)
+single-session-preference  : 13.33% (30 obs)
+single-session-user        : 82.86% (70 obs)
+temporal-reasoning         : 60.15% (133 obs)
 
 # Paulbot 'all grounded' 2025/05/24
 100% 500/500 [35:32<00:00,  4.26s/it]
 Evaluated 500 hypotheses with 305 successes.  Accuracy: 0.6100
 Accuracy: 0.61
-	knowledge-update           : 80.77% (78 obs)
-	multi-session              : 56.39% (133 obs)
-	single-session-assistant   : 82.14% (56 obs)
-	single-session-preference  : 36.67% (30 obs)
-	single-session-user        : 47.14% (70 obs)
-	temporal-reasoning         : 57.89% (133 obs)
+knowledge-update           : 80.77% (78 obs)
+multi-session              : 56.39% (133 obs)
+single-session-assistant   : 82.14% (56 obs)
+single-session-preference  : 36.67% (30 obs)
+single-session-user        : 47.14% (70 obs)
+temporal-reasoning         : 57.89% (133 obs)
 
 # PrakharLTM_v2 (Add turn-based RAG pipeline with CoT-based structured summarization and fact-grounded answering without haystack_dates)
 Evaluated 500 hypotheses with 304 successes. Accuracy: 0.6080  [14:15:54<00:00, 102.71s/it]
@@ -87,49 +88,60 @@ Accuracy: 0.608
 # Paulbot 'fallback' 2025/05/25
 Evaluated 500 hypotheses with 304 successes.  Accuracy: 0.6080
 Accuracy: 0.608
-	knowledge-update           : 80.77% (78 obs)
-	multi-session              : 56.39% (133 obs)
-	single-session-assistant   : 82.14% (56 obs)
-	single-session-preference  : 36.67% (30 obs)
-	single-session-user        : 45.71% (70 obs)
-	temporal-reasoning         : 57.89% (133 obs)
+knowledge-update           : 80.77% (78 obs)
+multi-session              : 56.39% (133 obs)
+single-session-assistant   : 82.14% (56 obs)
+single-session-preference  : 36.67% (30 obs)
+single-session-user        : 45.71% (70 obs)
+temporal-reasoning         : 57.89% (133 obs)
 
 # Paulbot 'sentences'
 100% 500/500 [28:23<00:00,  3.41s/it]
 Evaluated 500 hypotheses with 217 successes.  Accuracy: 0.4340
 Accuracy: 0.434
-	knowledge-update           : 39.74% (78 obs)
-	multi-session              : 30.08% (133 obs)
-	single-session-assistant   : 66.07% (56 obs)
-	single-session-preference  : 33.33% (30 obs)
-	single-session-user        : 58.57% (70 obs)
-	temporal-reasoning         : 43.61% (133 obs)
+knowledge-update           : 39.74% (78 obs)
+multi-session              : 30.08% (133 obs)
+single-session-assistant   : 66.07% (56 obs)
+single-session-preference  : 33.33% (30 obs)
+single-session-user        : 58.57% (70 obs)
+temporal-reasoning         : 43.61% (133 obs)
+
+#PrakharBot( Concatenate all conversations into a single prompt and sends this to GPT-4o with questions, similar to full context bot but smaller prompt and no extra line breaks)
+100% 500/500 [3:21:08<00:00, 24.14s/it]
+Evaluated 500 hypotheses with 127 successes.  Accuracy: 0.2540
+Accuracy: 0.254
+knowledge-update           : 33.33% (78 obs)
+multi-session              : 19.55% (133 obs)
+single-session-assistant   : 21.43% (56 obs)
+single-session-preference  : 10.00% (30 obs)
+single-session-user        : 37.14% (70 obs)
+temporal-reasoning         : 25.56% (133 obs)
 
 # GuessBot (does guess Family Feud style, with no context, just the question)
 Accuracy: 0.188
-	knowledge-update           : 19.23% (78 obs)
-	multi-session              : 10.53% (133 obs)
-	single-session-assistant   : 23.21% (56 obs)
-	single-session-preference  : 13.33% (30 obs)
-	single-session-user        : 20.00% (70 obs)
-	temporal-reasoning         : 25.56% (133 obs)
+knowledge-update           : 19.23% (78 obs)
+multi-session              : 10.53% (133 obs)
+single-session-assistant   : 23.21% (56 obs)
+single-session-preference  : 13.33% (30 obs)
+single-session-user        : 20.00% (70 obs)
+temporal-reasoning         : 25.56% (133 obs)
 
 # First result from Agent001: Abysmal!  And with high latency!  2025/05/22
 Evaluated 500 hypotheses with 47 successes.  Accuracy: 0.0940
 Accuracy: 0.094
-	knowledge-update           :  8.97% (78 obs)
-	multi-session              :  8.27% (133 obs)
-	single-session-assistant   : 23.21% (56 obs)
-	single-session-preference  :  6.67% (30 obs)
-	single-session-user        :  8.57% (70 obs)
-	temporal-reasoning         :  6.02% (133 obs)
+knowledge-update           :  8.97% (78 obs)
+multi-session              :  8.27% (133 obs)
+single-session-assistant   : 23.21% (56 obs)
+single-session-preference  :  6.67% (30 obs)
+single-session-user        :  8.57% (70 obs)
+temporal-reasoning         :  6.02% (133 obs)
 
 # DontKnowBot (repeats question and says 'I don't know the answer to that!'
 Evaluated 500 hypotheses with 29 successes.  Accuracy: 0.0580
 Accuracy: 0.058
-	knowledge-update           :  6.41% (78 obs)
-	multi-session              :  9.02% (133 obs)
-	single-session-assistant   :  0.00% (56 obs)
-	single-session-preference  :  0.00% (30 obs)
-	single-session-user        :  8.57% (70 obs)
-	temporal-reasoning         :  4.51% (133 obs)
+knowledge-update           :  6.41% (78 obs)
+multi-session              :  9.02% (133 obs)
+single-session-assistant   :  0.00% (56 obs)
+single-session-preference  :  0.00% (30 obs)
+single-session-user        :  8.57% (70 obs)
+temporal-reasoning         :  4.51% (133 obs)
