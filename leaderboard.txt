@@ -31,6 +31,16 @@ Accuracy: 0.66
 	single-session-user        : 85.71% (70 obs)
 	temporal-reasoning         : 59.40% (133 obs)
 
+#PrakharLTM_V3 ( Turn level retrival with haystack_dates included)
+Evaluated 500 hypotheses with 328 successes. Accuracy: 0.6560 [7:59:02<00:00, 57.49s/it]
+Accuracy: 0.656 
+	knowledge-update          : 75.64% (78 obs)
+	multi-session             : 50.38% (133 obs)
+	single-session-assistant  : 100.00% (56 obs)
+	single-session-preference : 36.67% (30 obs)
+	single-session-user       : 88.57% (70 obs)
+	temporal-reasoning        : 54.89% (133 obs)
+
 # Paulbot2.1 'fallback' with updated data 2025/05/25/21:17
 100% 500/500 [22:07<00:00,  2.65s/it]
 Evaluated 500 hypotheses with 326 successes.  Accuracy: 0.6520
