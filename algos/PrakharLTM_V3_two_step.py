@@ -25,7 +25,7 @@ def process_question(memstruct, question: str, question_date: str) -> str:
     corpus_embeddings, all_turns = memstruct
     query_embedding = retrieval_model.encode(question, convert_to_tensor=True)
     # Retrieve top-k relevant messages using semantic search
-    hits = util.semantic_search(query_embedding, corpus_embeddings, top_k=10)[0]
+    hits = util.semantic_search(query_embedding, corpus_embeddings, top_k=11)[0]
     retrieved = [all_turns[hit['corpus_id']] for hit in hits]
     # 2: Use chain-of-thought summarization to extract structured facts
     summary_prompt = f"""
