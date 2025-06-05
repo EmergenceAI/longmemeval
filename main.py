@@ -34,7 +34,7 @@ def run_expt():
     tolerance = 0.05 # Not used if b_nobs > 0
     #
     # hypotheses, num_success, nobs, process_time = predict_with_early_stopping(haystacks, process_question, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=False)
-    hypotheses, num_success, nobs, haystack_time, question_time = predict_with_early_stopping_two_step(haystacks, process_haystack, process_question, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=False)
+    hypotheses, num_success, nobs, haystack_time, question_time = predict_with_early_stopping_two_step(haystacks, process_haystack, process_question, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=True)
     print(f'Evaluated {nobs} hypotheses with {num_success} successes.  Accuracy: {num_success / nobs:.4f}')
     metrics = evaluate_qa(hypotheses, evaluator)
     return metrics + f'\nHaystack time: {haystack_time/nobs:.4f}s/it\nQuestion time: {question_time/nobs:.4f}s/it'
