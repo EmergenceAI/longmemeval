@@ -1,13 +1,13 @@
-# from algos.example_function import hello_world_process_question as process_func
-# from algos.example_guessbot import hello_world_process_question as process_func
-# from algos.example_prakhar_bot import process_question as process_func
-# from algos.example_rest_api import call_rest_endpoint as process_func
-# from algos.example_jeremy_mem import hello_world_process_question as process_func
-# from algos.example_fullcontext import process_question as process_func
-# from algos.example_memcheat import process_question as process_func
-# from algos.paul_thing import process_question as process_func
-from algos.paul_thing3 import process_question as process_func
-# from algos.PrakharLTM_V3 import process_question as process_func
+# from algos.example_function import hello_world_process_question as process_question
+# from algos.example_guessbot import hello_world_process_question as process_question
+# from algos.example_prakhar_bot import process_question
+# from algos.example_rest_api import call_rest_endpoint as process_question
+# from algos.example_jeremy_mem import hello_world_process_question as process_question
+# from algos.example_fullcontext import process_question
+# from algos.example_memcheat import process_question
+# from algos.paul_thing import process_question
+from algos.paul_thing3 import process_question
+# from algos.PrakharLTM_V3 import process_question
 
 ### Edit ^^^ to point to your function.
 
@@ -32,14 +32,14 @@ def run_expt():
     b_nobs = 0
     tolerance = 0.05 # Not used if b_nobs > 0
     #
-    hypotheses, num_success, nobs = predict_with_early_stopping(haystacks, process_func, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=False)
+    hypotheses, num_success, nobs = predict_with_early_stopping(haystacks, process_question, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=False)
     print(f'Evaluated {nobs} hypotheses with {num_success} successes.  Accuracy: {num_success / nobs:.4f}')
     metrics = evaluate_qa(hypotheses, evaluator)
     return metrics
 
 def main():
     # This must be run *before* run_expt() so that the logger is initialized with the proper checkpoint and timestamps.
-    dumblogger = DumbLogger(REPO_PATH, LOG_DIR, process_func.__module__, process_func.__name__)
+    dumblogger = DumbLogger(REPO_PATH, LOG_DIR, process_question.__module__, process_question.__name__)
     metrics = run_expt()
     dumblogger.log_it_up(metrics)
 
