@@ -8,7 +8,8 @@
 # from algos.paul_thing import process_question
 # from algos.paul_thing3 import process_haystack, process_question
 # from algos.PrakharLTM_V3_two_step import process_question, process_haystack
-from algos.full_o1 import process_question, process_haystack
+# from algos.full_o1 import process_question, process_haystack
+from algos.paul_thing4 import process_question, process_haystack
 
 ### Edit ^^^ to point to your function.
 
