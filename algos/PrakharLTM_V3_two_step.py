@@ -42,7 +42,7 @@ def process_question(memstruct, question: str, question_date: str) -> str:
     Now extract the structured facts:
     -
     """
-    summary_prompt = deindent(summary_prompt)
+    summary_prompt = dedent(summary_prompt)
     facts = callgpt([{"role": "system", "content": summary_prompt}], model="gpt-4o", max_tokens=1024)
     # 3: Answer the question using only the extracted facts
     answer_prompt = f"""
@@ -55,6 +55,6 @@ def process_question(memstruct, question: str, question_date: str) -> str:
     Question date: {question_date}
     Answer:
     """
-    answer_prompt = deindent(answer_prompt)
+    answer_prompt = dedent(answer_prompt)
     answer = callgpt([{"role": "system", "content": answer_prompt}], model="gpt-4o", max_tokens=512)
     return answer.strip()
