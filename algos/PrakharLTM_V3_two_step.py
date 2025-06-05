@@ -1,6 +1,6 @@
 from sentence_transformers import SentenceTransformer, util
 import json
-from utils import callgpt, deindent
+from utils import callgpt, dedent
 
 # Load once
 retrieval_model = SentenceTransformer('all-MiniLM-L6-v2')
