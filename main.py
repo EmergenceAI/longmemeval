@@ -37,7 +37,7 @@ def run_expt():
     hypotheses, num_success, nobs, haystack_time, question_time = predict_with_early_stopping_two_step(haystacks, process_haystack, process_question, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=False)
     print(f'Evaluated {nobs} hypotheses with {num_success} successes.  Accuracy: {num_success / nobs:.4f}')
     metrics = evaluate_qa(hypotheses, evaluator)
-    return metrics + f'\nHaystack time: {haystack_time/{nobs}:.4f}s/it\nQuestion time: {question_time/{nobs}:.4f}s/it'
+    return metrics + f'\nHaystack time: {haystack_time/nobs:.4f}s/it\nQuestion time: {question_time/nobs:.4f}s/it'
 
 def main():
     # This must be run *before* run_expt() so that the logger is initialized with the proper checkpoint and timestamps.
