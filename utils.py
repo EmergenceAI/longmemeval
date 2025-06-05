@@ -5,6 +5,20 @@ from scipy.stats import fisher_exact
 DATA_DIR = './data/'
 CACHE_DIR = './cache/'
 
+# Remove the left indent and first and last carriage returns.
+def deindent(s: str) -> str:
+    lines = s.split('\n')
+    assert len(lines) > 1
+    assert lines[0].strip() == ''
+    assert lines[-1].strip() == ''
+    if len(lines) == 2: return ''
+    lines = lines[1:]
+    # Assume the first line the the leftmost indent.
+    indent = len(lines[0]) - len(lines[0].lstrip())
+    # Remove up to indent spaces from each line, if they are there.
+    lines = [line[min(len(line) - len(line.lstrip()), indent):] for line in lines]
+    return '\n'.join(lines)
+
 ################ GPT with disk caching.
 def immutify_messages(messages):
     return tuple(json.dumps(message, sort_keys=True) for message in messages)
