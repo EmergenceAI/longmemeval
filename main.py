@@ -12,7 +12,8 @@ from algos.PrakharLTM_V3_two_step import process_question, process_haystack
 ### Edit ^^^ to point to your function.
 
 import json, os
-from utils import Evaluator, predict_with_early_stopping, evaluate_qa, DumbLogger
+# from utils import Evaluator, predict_with_early_stopping, evaluate_qa, DumbLogger
+from utils import Evaluator, predict_with_early_stopping_two_step, evaluate_qa, DumbLogger
 
 DATA_DIR = './data/'
 REPO_PATH = '.'
