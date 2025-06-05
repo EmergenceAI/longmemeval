@@ -1,15 +1,9 @@
-import openai, numpy as np, json, diskcache, os, random, tqdm
+import openai, numpy as np, json, diskcache, os, random, tqdm, time
 from statsmodels.stats.proportion import proportion_confint, proportions_ztest
 from scipy.stats import fisher_exact
 
 DATA_DIR = './data/'
 CACHE_DIR = './cache/'
-
-def process_question(haystack_sessions: list[list[dict]], question: str, question_date:str, haystack_dates: list[str]) -> str:
-    # haystack_sessions is a list of sessions, each session is a list of turns, each turn is a dict with role and content
-    # question_date : '2023/08/20 (Sun) 23:59'
-    # return hypothesis: str
-    return f"{question}?  I don't know the answer to that!"
 
 ################ GPT with disk caching.
 def immutify_messages(messages):
@@ -74,7 +68,7 @@ class Evaluator:
         return label
 
 ################ Evaluate with early stopping.
-def process_haystack(haystack, process_func):
+def run_haystack(haystack, process_func):
     question_id = haystack['question_id']
     question = haystack['question']
     question_date = haystack['question_date']
@@ -120,6 +114,11 @@ def stop_early(num_success, nobs, confidence=0.95, b_successes=0, b_nobs=0, tole
     interval_width = upper - lower
     return interval_width <= 2 * tolerance
 
+class Stopwatch:
+    def __init__(self): self._start = None
+    def start(self): self._start = time.perf_counter()
+    def stop(self): return time.perf_counter() - self._start
+
 def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0.99, b_successes=0, b_nobs=0, tolerance=0.05, verbose=False):
     """
     Processes Xs one by one, stopping early when some certainty is reached.
@@ -141,8 +140,12 @@ def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0
     """
     num_success, nobs = 0, 0
     hypotheses = []
+    stopwatch = Stopwatch()
+    process_time = 0.
     for haystack in tqdm.tqdm(fixed_shuffle(haystacks)):
-        hypothesis = process_haystack(haystack, process_func)
+        stopwatch.start()
+        hypothesis = run_haystack(haystack, process_func)
+        process_time += stopwatch.stop()
         result = evaluator.evaluate(hypothesis)
         hypothesis['label'] = result
         hypotheses.append(hypothesis)
@@ -157,7 +160,62 @@ def predict_with_early_stopping(haystacks, process_func, evaluator, confidence=0
             tqdm.tqdm.write(f'Stopping early at {nobs} trials with {num_success} successes.')
             if b_nobs > 0: tqdm.tqdm.write(f'Current model is {"BETTER" if num_success / nobs > b_successes / b_nobs else "WORSE"} THAN baseline.')
             break
-    return hypotheses, num_success, nobs
+    return hypotheses, num_success, nobs, process_time
+
+################ Hacka hacka
+
+def predict_with_early_stopping_two_step(haystacks, process_haystack, process_question, evaluator, confidence=0.99, b_successes=0, b_nobs=0, tolerance=0.05, verbose=False):
+    """
+    Processes Xs one by one, stopping early when some certainty is reached.
+    1. If b_nobs > 0, compare against baseline.
+    2. If b_nobs == 0, use tolerance.
+
+    process_func: function to process the haystack, see example of "process_question" above.
+
+    Parameters:
+    - confidence: confidence level (default 0.95)
+
+    # If comparing agains baseline, use these:
+    - b_successes: number of successful outcomes from baseline
+    - b_nobs: total trials from baseline
+    - direction: "better", "worse", or "either" (default)
+
+    # If no baseline, use tolerance:
+    - tolerance: maximum allowed half-width of the confidence interval
+    """
+    num_success, nobs = 0, 0
+    hypotheses = []
+    stopwatch = Stopwatch()
+    haystack_time, question_time = 0., 0.
+    for haystack in tqdm.tqdm(fixed_shuffle(haystacks)):
+        question_id = haystack['question_id']
+        question = haystack['question']
+        question_date = haystack['question_date']
+        haystack_dates = haystack['haystack_dates']
+        haystack_sessions = haystack['haystack_sessions']
+        stopwatch.start()
+        memstruct = process_haystack(haystack_sessions, haystack_dates)
+        haystack_time += stopwatch.stop()
+        stopwatch.start()
+        guess = process_question(memstruct, question, question_date)
+        question_time += stopwatch.stop()
+        hypothesis = {'question_id': question_id, 'hypothesis': guess}
+        result = evaluator.evaluate(hypothesis)
+        hypothesis['label'] = result
+        hypotheses.append(hypothesis)
+        num_success += result
+        nobs += 1
+        if verbose:
+            tqdm.tqdm.write(f'\nQuestion: {haystack["question"]}')
+            tqdm.tqdm.write(f'Hypothesis: {hypothesis["hypothesis"]}')
+            tqdm.tqdm.write(f'Ground truth: {haystack["answer"]}')
+            tqdm.tqdm.write(f'Processed {nobs} trials with {num_success} successes.  The last result was {result}.')
+        if stop_early(num_success, nobs, confidence, b_successes, b_nobs, tolerance):
+            tqdm.tqdm.write(f'Stopping early at {nobs} trials with {num_success} successes.')
+            if b_nobs > 0: tqdm.tqdm.write(f'Current model is {"BETTER" if num_success / nobs > b_successes / b_nobs else "WORSE"} THAN baseline.')
+            break
+    return hypotheses, num_success, nobs, haystack_time, question_time
+
 
 ################ Print some stats
 # This basically just prints out the model stats.  It can do the evaluation, but it shouldn't.
