@@ -88,7 +88,7 @@ class PaulThing:
             allfacts += f'FACTS FROM CONVERSATION ON {date}:'
             for fact in facts: allfacts += f'\n    {fact}'
             allfacts += '\n\n'
-        answer = callgpt([{'role': 'system', 'content': f'Given the facts and dates below, please succinctly answer the question. \n\n FACTS:\n{allfacts}\n\nQUESTION: {question}\n\nQUESTION_DATE: {question_date}'}], model='gpt-4o', max_tokens=2048)
+        answer = callgpt([{'role': 'system', 'content': f'Given the facts and dates below, please succinctly answer the question.  Pay attention to the dates of the question and the conversations. \n\n FACTS:\n{allfacts}\n\nQUESTION: {question}\n\nQUESTION_DATE: {question_date}'}], model='gpt-4o', max_tokens=2048)
         return answer
 
 def process_haystack(haystack_sessions: list[list[dict]], haystack_dates: list[str]):
