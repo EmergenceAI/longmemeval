@@ -13,10 +13,7 @@
 # from algos.full_o3 import process_question, process_haystack
 from algos.cheatbot import process_question, process_haystack
 
-### Edit ^^^ to point to your function.
-
 import json, os
-# from utils import Evaluator, predict_with_early_stopping, evaluate_qa, DumbLogger
 from utils import Evaluator, predict_with_early_stopping_two_step, evaluate_qa, DumbLogger
 
 DATA_DIR = './data/'
@@ -35,8 +32,6 @@ def run_expt():
     b_successes = 350
     b_nobs = 500
     tolerance = 0.05 # Not used if b_nobs > 0
-    #
-    # hypotheses, num_success, nobs, process_time = predict_with_early_stopping(haystacks, process_question, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=False)
     hypotheses, num_success, nobs, haystack_time, question_time = predict_with_early_stopping_two_step(haystacks, process_haystack, process_question, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=True)
     print(f'Evaluated {nobs} hypotheses with {num_success} successes.  Accuracy: {num_success / nobs:.4f}')
     metrics = evaluate_qa(hypotheses, evaluator)
