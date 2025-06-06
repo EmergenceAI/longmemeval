@@ -9,12 +9,11 @@
 # from algos.paul_thing3 import process_haystack, process_question
 # from algos.PrakharLTM_V3_two_step import process_question, process_haystack
 # from algos.full_o1 import process_question, process_haystack
-from algos.paul_thing4 import process_question, process_haystack
-
-### Edit ^^^ to point to your function.
+# from algos.paul_thing4 import process_question, process_haystack
+# from algos.full_o3 import process_question, process_haystack
+from algos.cheatbot import process_question, process_haystack
 
 import json, os
-# from utils import Evaluator, predict_with_early_stopping, evaluate_qa, DumbLogger
 from utils import Evaluator, predict_with_early_stopping_two_step, evaluate_qa, DumbLogger
 
 DATA_DIR = './data/'
@@ -29,13 +28,10 @@ def run_expt():
     haystacks = json.load(open(f'{DATA_DIR}/{filename}'))
     evaluator = Evaluator(haystacks)
     # Early stopping parameters
-    # confidence = 0.99 # Set to 1 to disable early stopping
-    confidence = 1.
-    b_successes = 0
-    b_nobs = 0
+    confidence = 1. # .9999 Set to 1 to disable early stopping
+    b_successes = 350
+    b_nobs = 500
     tolerance = 0.05 # Not used if b_nobs > 0
-    #
-    # hypotheses, num_success, nobs, process_time = predict_with_early_stopping(haystacks, process_question, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=False)
     hypotheses, num_success, nobs, haystack_time, question_time = predict_with_early_stopping_two_step(haystacks, process_haystack, process_question, evaluator, confidence, b_successes, b_nobs, tolerance, verbose=True)
     print(f'Evaluated {nobs} hypotheses with {num_success} successes.  Accuracy: {num_success / nobs:.4f}')
     metrics = evaluate_qa(hypotheses, evaluator)
