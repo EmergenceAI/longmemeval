@@ -28,7 +28,7 @@ def run_expt():
     haystacks = json.load(open(f'{DATA_DIR}/{filename}'))
     evaluator = Evaluator(haystacks)
     # Early stopping parameters
-    confidence = .9999 # Set to 1 to disable early stopping
+    confidence = 1. # .9999 Set to 1 to disable early stopping
     b_successes = 350
     b_nobs = 500
     tolerance = 0.05 # Not used if b_nobs > 0
