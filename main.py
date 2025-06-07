@@ -11,7 +11,8 @@
 # from algos.full_o1 import process_question, process_haystack
 # from algos.paul_thing4 import process_question, process_haystack
 # from algos.full_o3 import process_question, process_haystack
-from algos.cheatbot import process_question, process_haystack
+# from algos.cheatbot import process_question, process_haystack
+from algos.PrakharLTM_V4 import process_question, process_haystack
 
 import json, os
 from utils import Evaluator, predict_with_early_stopping_two_step, evaluate_qa, DumbLogger
