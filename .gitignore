@@ -6,3 +6,5 @@ messages.pkl
 messages_embedding.index
 
 *.xlsx
+
+flycheck_*.py
