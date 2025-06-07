@@ -1,8 +1,6 @@
 from sentence_transformers import SentenceTransformer, util
 import json
-from utils import callgpt
-from textwrap import dedent
-
+from utils import callgpt, dedent
 
 # Load once
 retrieval_model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -17,8 +15,7 @@ def process_haystack(haystack_sessions: list[list[dict]], haystack_dates: list[s
     corpus_embeddings = retrieval_model.encode(all_turns, convert_to_tensor=True)
     return corpus_embeddings, all_turns
 
-def process_question(haystack_sessions: list[list[dict]], question: str, question_date: str, haystack_dates: list[str]) -> str:
-    memstruct = process_haystack(haystack_sessions, haystack_dates)
+def process_question(memstruct, question: str, question_date: str) -> str:
     corpus_embeddings, all_turns = memstruct
     query_embedding = retrieval_model.encode(question, convert_to_tensor=True)
 
